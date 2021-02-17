@@ -23,22 +23,21 @@ public class UserDatabase {
         }
     }
 
-    public Boolean executeUpdate(String query) {
-        Boolean result=false;
+    public String executeUpdate(String query) {
+
         try {
             getConnection();
             statement=connection.createStatement();
             int count=statement.executeUpdate(query);
             if (count > 0) {
-                return true;
+                return "New user has been added";
             }
            
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return result;
-       
+       return "Error adding user";
     }
     
     public ResultSet executeQuery(String query){

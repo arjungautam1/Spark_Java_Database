@@ -11,9 +11,10 @@ import model.User;
 import java.util.List;
 
 public interface UserServices {
-    public List<User> getAllUsers();
-//    public User getUserById(int id);
-//    public boolean addUser(User user);
+    List<User> getAllUsers();
+
+    // User getUserById(int id);
+    String addUser(User user);
 //    public User updateUser(int id,User user);
 //    public boolean deleteUser(int id);
 }
