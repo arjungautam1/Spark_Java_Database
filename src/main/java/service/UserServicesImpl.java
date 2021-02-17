@@ -15,17 +15,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserServicesImpl implements UserServices {
-    UserDatabase userDatabase=new UserDatabase();
+    UserDatabase userDatabase = new UserDatabase();
+
     /* Add User */
     @Override
-    public String addUser(User user){
+    public String addUser(User user) {
 
-        int id=user.getId();
-        String fistName=user.getFirstName();
-        String lastName=user.getLastName();
-        int age=user.getAge();
-        String query="insert into users(id,firstName,lastName,age)values("+id+",'"+fistName+"','"+lastName+"',"+age+")";
-        String result =userDatabase.executeUpdate(query);
+        int id = user.getId();
+        String fistName = user.getFirstName();
+        String lastName = user.getLastName();
+        int age = user.getAge();
+        String query = "insert into users(id,firstName,lastName,age)values(" + id + ",'" + fistName + "','" + lastName + "'," + age + ")";
+        String result = userDatabase.executeUpdate(query);
         return result;
     }
 
@@ -33,28 +34,48 @@ public class UserServicesImpl implements UserServices {
     /* Get all users */
 
     @Override
-    public List<User> getAllUsers(){
-        List<User> userList=new ArrayList<>();
-        String query="select * from users";
-        ResultSet resultSet=userDatabase.executeQuery(query);
+    public List<User> getAllUsers() {
+        List<User> userList = new ArrayList<>();
+        String query = "select * from users";
+        ResultSet resultSet = userDatabase.executeQuery(query);
 
-        if(resultSet!=null){
-            try{
-                while (resultSet.next()){
-                    User user=new User();
+        if (resultSet != null) {
+            try {
+                while (resultSet.next()) {
+                    User user = new User();
                     user.setId(resultSet.getInt("id"));
                     user.setFirstName(resultSet.getString("firstName"));
                     user.setLastName(resultSet.getString("lastName"));
                     user.setAge(resultSet.getInt("age"));
                     userList.add(user);
-
                 }
-            }
-            catch (SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
         return userList;
+    }
+
+    /* Get User By ID */
+    @Override
+    public User getUserById(int id) {
+        User user = new User();
+        String query = "Select * from users where id =" + id;
+        ResultSet resultSet = userDatabase.executeQuery(query);
+        if (resultSet != null) {
+            try {
+                while (resultSet.next()) {
+                    user.setId(resultSet.getInt("id"));
+                    user.setFirstName(resultSet.getString("firstName"));
+                    user.setLastName(resultSet.getString("lastName"));
+                    user.setAge(resultSet.getInt("age"));
+
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return user;
     }
 
 

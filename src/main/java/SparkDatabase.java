@@ -37,8 +37,13 @@ public class SparkDatabase {
             return mapper.writeValueAsString(userList);
         });
 
+        /* Get user by ID */
 
-
+        get("/user/:id", (request, response) -> {
+            int id = Integer.parseInt(request.params(":id"));
+            User user = userServices.getUserById(id);
+            return mapper.writeValueAsString(user);
+        });
 
 
     }

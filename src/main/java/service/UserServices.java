@@ -13,7 +13,8 @@ import java.util.List;
 public interface UserServices {
     List<User> getAllUsers();
 
-    // User getUserById(int id);
+    User getUserById(int id);
+
     String addUser(User user);
 //    public User updateUser(int id,User user);
 //    public boolean deleteUser(int id);
