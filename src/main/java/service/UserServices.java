@@ -18,5 +18,6 @@ public interface UserServices {
     String addUser(User user);
 
     User updateUser(int id, User user);
-//    public boolean deleteUser(int id);
+
+    String deleteUser(int id);
 }

@@ -104,7 +104,16 @@ public class UserServicesImpl implements UserServices {
 
         return user;
 
+    }
 
+    /*Delete User by ID */
+
+    @Override
+    public String deleteUser(int id) {
+
+        String query = "delete from users where id=" + id;
+        userDatabase.executeUpdate(query);
+        return "User with " + id + " has been deleted sucessfully ";
     }
 
 

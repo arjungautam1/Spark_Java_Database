@@ -54,6 +54,19 @@ public class SparkDatabase {
             return mapper.writeValueAsString(user);
         });
 
+        /* Delete user by id */
+        delete("/user/:id", (request, response) -> {
+            try {
+                int id = Integer.parseInt(request.params(":id"));
+                String result=userServices.deleteUser(id);
+                return mapper.writeValueAsString(result);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+            return null;
+        });
+
 
     }
 }
