@@ -45,6 +45,15 @@ public class SparkDatabase {
             return mapper.writeValueAsString(user);
         });
 
+        /* edit user by id */
+
+        put("/user/:id", (request, response) -> {
+            int id = Integer.parseInt(request.params(":id"));
+            User user = mapper.readValue(request.body(), User.class);
+            user = userServices.updateUser(id, user);
+            return mapper.writeValueAsString(user);
+        });
+
 
     }
 }

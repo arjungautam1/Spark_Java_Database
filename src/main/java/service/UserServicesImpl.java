@@ -78,5 +78,34 @@ public class UserServicesImpl implements UserServices {
         return user;
     }
 
+    /* Update User by ID */
+
+    @Override
+    public User updateUser(int id, User user) {
+
+        User previousUser = getUserById(id);
+
+        if (previousUser.getFirstName() != user.getFirstName() && user.getFirstName() != null) {
+            previousUser.setFirstName(user.getFirstName());
+        }
+
+        if (previousUser.getLastName() != user.getLastName() && user.getLastName() != null) {
+            previousUser.setLastName(user.getLastName());
+        }
+
+        if (previousUser.getAge() != user.getAge() && user.getAge() != 0) {
+            previousUser.setAge(user.getAge());
+        }
+
+        user = previousUser;
+        String query = "update users set firstName='" + user.getFirstName() + "',lastName='" + user.getLastName() + "',age=" + user.getAge() + " where id=" + id;
+
+        userDatabase.executeUpdate(query);
+
+        return user;
+
+
+    }
+
 
 }
